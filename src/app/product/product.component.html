@@ -1,0 +1,32 @@
+<p>product works!</p>
+<p>{{ name }}</p>
+<h1>{{ 1 + add() }}</h1>
+<button [disabled]="prop" type="submit">save</button>
+<br/>
+<button (click)="show()" type="submit">Show</button>
+<p>{{message}}</p>
+<input [(ngModel)]='prop1'/>
+<p>{{prop1}}</p>
+
+<table border="3">
+    <tr>
+        <td>id</td>
+        <td>title</td>
+        <td>price</td>
+        <td>quantity</td>
+        <td>like</td>
+        <td>action</td>
+        <td>like</td>
+    </tr>
+    <tr *ngFor="let p of listProdcut, let i =index">
+        <td>{{p.id}}</td>
+        <td>{{p.title}}</td>
+        <td>{{p.price}}</td>
+        <td>{{p.quantity}}</td>
+        <td>{{p.like}}</td>
+        <td><button  (click)='buy(i)'  type="submit">buy</button></td>
+        <td><button  (click)='like(i)' type="submit">like</button></td>
+    </tr>
+
+    
+</table>

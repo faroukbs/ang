@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>test </h1>
+  <div class="form-group">
+    <label for="id">ID:</label>
+    <input type="number" class="form-control" id="id" [(ngModel)]="id" (ngModelChange)="validateForm()">
+    <div *ngIf="!id || id < 1 || id > 9" class="text-danger">ID should be a number between 1 and 9</div>
+  </div>
+  <div class="form-group">
+    <label for="quantite">Quantité:</label>
+    <input type="number" class="form-control" id="quantite" [(ngModel)]="quantite" (ngModelChange)="validateForm()">
+    <div *ngIf="quantite === undefined || quantite === null || quantite.toString().length !== 3" class="text-danger">Quantité should be a 3-digit number</div>
+  </div>
+  <div class="form-group">
+    <label for="titre">Titre:</label>
+    <input type="text" class="form-control" id="titre" [(ngModel)]="titre" (ngModelChange)="validateForm()">
+    <div *ngIf="!titre || titre.length < 3 || titre !== titre.toUpperCase()" class="text-danger">Titre should be at least 3 characters long and uppercase</div>
+  </div>
+  <button type="submit" [disabled]="isSubmitDisabled" (click)="submitForm()">Submit</button>
+</div>

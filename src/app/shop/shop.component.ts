@@ -9,25 +9,38 @@ import { Router } from '@angular/router';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
-  id: number = 0; // initialize the property when declaring it
-  quantite: number = 0;
-  titre: string = '';
-  isSubmitDisabled = true;
+  product!: Product;
+  titleInvalid = false;
+  titleTouched = false;
 
   constructor(private router: Router) { }
+
   ngOnInit(): void {
+    this.product = new Product();
   }
 
-  submitForm(): void {
-    // handle the form submission here
-    console.log('Form submitted successfully!');
-    // navigate to the principal route
-    this.router.navigate(['/principal']);
+  validateTitle() {
+    const title = this.product.title;
+    if (title.length < 3 || !/^[A-Z]/.test(title)) {
+      this.titleInvalid = true;
+    } else {
+      this.titleInvalid = false;
+    }
+    this.titleTouched = true;
   }
-  validateForm(): void {
-    this.isSubmitDisabled = !(this.id && this.quantite && this.titre
-      && this.id >= 1 && this.id <= 9
-      && this.quantite.toString().length === 3
-      && this.titre.length >= 3 && this.titre === this.titre.toUpperCase());
+
+  isFormValid(): boolean {
+    if (!this.product.id || this.product.id.trim() === '' ||
+      !this.product.title || this.product.title.trim() === '' ||
+      !this.product.quantity || this.product.quantity.trim() === '') {
+      return false;
+    }
+   
+    return true; 
+  }
+
+  
+  submit() {
+    console.log(this.product);
   }
 }
